@@ -1,19 +1,9 @@
 import { createStore } from 'redux';
 
-//methna dana value eka dn redux store eke defualt value eka widiyata gihin thiyenne
-const defaultState = {
-  number: 0,
-};
+import reducer from './reducer/number';
+// step - how change values in store
 
-//mehema hadapu reduser functions wenama file ekak hdal dnn puluwan
-const reducer = (state = defaultState, action) => {
-  return state;
-};
-
-// create store eke reduser function eke default state eka methna pass krnne na
-// eka reduser function eka athulema passs kra
-// store ekak hdaddi default state ekak denna one
-
+//store eke statew eka wens krna function eka thma dispatch() kiyne
 const store = createStore(reducer);
 
 export default store;
