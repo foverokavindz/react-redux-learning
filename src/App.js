@@ -28,6 +28,7 @@ const App = () => {
 
             */
 
+            // methanama payload eka denn puluwan
             dispatch(numberIncrement(1));
           }}
         >

@@ -10,14 +10,15 @@ const numberAction = {
 };
 
 // action ekata adalawa object ekk generate krnna function ekk hdnn One
-export const numberIncrement = (payload) => {
+// object widiyata export krnn puluwan
+const numberIncrement = (payload) => {
   return {
     type: numberAction.INC,
     payload,
   };
 };
 
-export const numberDecrement = (payload) => {
+const numberDecrement = (payload) => {
   return {
     type: numberAction.DEC,
     payload,
@@ -38,4 +39,6 @@ const reducer = (state = defaultState, action) => {
   return state;
 };
 
+// eka eka nthuwa eka object ekak widiyt export krnwa
+export { numberDecrement, numberIncrement };
 export default reducer;
