@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { numberDecrement, numberIncrement } from './store/reducer/number';
+import { Home } from './pages/Home';
 
 const App = () => {
   //store eken return ekak gnn puluwan function ekak widiyata
@@ -16,20 +18,24 @@ const App = () => {
       <div>
         <button
           onClick={() => {
+            /* meka hama thissema liynwt wada action ekk generate krna function ekak liynn puluwan */
+            /* 
+            
             dispatch({
               type: 'increment',
               payload: 7,
             });
+
+            */
+
+            dispatch(numberIncrement(1));
           }}
         >
           Increment
         </button>
         <button
           onClick={() => {
-            dispatch({
-              type: 'decrement',
-              payload: 7,
-            });
+            dispatch(numberDecrement(1));
           }}
         >
           Decrement
@@ -37,6 +43,7 @@ const App = () => {
       </div>
       <br />
       <div>{number}</div>
+      <Home />
     </div>
   );
 };
