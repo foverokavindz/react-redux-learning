@@ -5,6 +5,7 @@ import {
   removeItemFromCart,
   selectCart,
   removeOneItemFromCart,
+  clearCart,
 } from './store/reducers/cartSlice';
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
         </p>
       ))}
       <h3>total price - Rs:{total}</h3>
+      <button onClick={() => dispatch(clearCart())}>Clear cart</button>
     </div>
   );
 };

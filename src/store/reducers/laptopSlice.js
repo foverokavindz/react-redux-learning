@@ -8,13 +8,13 @@ const initialState = [
     ram: '8 GB',
   },
   {
-    id: 12,
+    id: 2,
     price: 450000,
     cpu: 'i9',
     ram: '32 GB',
   },
   {
-    id: 13,
+    id: 3,
     price: 1250000,
     cpu: 'i9 K',
     ram: '50 GB',
