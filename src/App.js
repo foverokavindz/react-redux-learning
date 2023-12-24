@@ -1,32 +1,57 @@
-import { useState } from 'react';
-import { produce } from 'immer';
-
-const obj = {
-  name: 'amila',
-  city: 'Tangalle',
-  position: 'Web Developer',
-  address: {
-    add1: 'nuwara',
-  },
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { selectLaptop } from './store/reducers/laptopSlice';
+import {
+  addItemToCart,
+  removeItemFromCart,
+  selectCart,
+  removeOneItemFromCart,
+} from './store/reducers/cartSlice';
 
 const App = () => {
-  const [test, setTest] = useState({ ...obj });
+  const laptop = useSelector(selectLaptop);
+  const cart = useSelector(selectCart);
+  const dispatch = useDispatch();
 
-  const clickHandle = () => {
-    // react waladi producer function eka athulta prev state eka denna one na...specily react walt puluwan pre stat eka producer dunction ekt automaticaly arn new state ekk hdnna
-    // spread kr kr object copy arn wens krna ekt lesi widiyak thma Immer eken krnne
-    setTest(
-      produce((prevState) => {
-        prevState.address.add2 = 'Colombo';
-      })
-    );
-  };
+  let total = 0;
+  let itemCount = 0;
+
+  if (cart.length > 0) {
+    cart.forEach((el) => {
+      total += el.count * el.price;
+      itemCount += el.count;
+    });
+  } else {
+    total = 0;
+  }
 
   return (
     <div>
-      <button onClick={clickHandle}>Click me</button>
-      {console.log(test)}
+      {laptop.map(({ id, cpu, ram, price }) => (
+        <p key={id}>
+          {price} | {cpu} | {ram}
+          <button onClick={() => dispatch(addItemToCart(id, cpu, ram, price))}>
+            Add to cart
+          </button>
+        </p>
+      ))}
+
+      <br />
+      <h1>Cart</h1>
+      <hr />
+
+      <h3>items x {itemCount}</h3>
+      {cart.map(({ id, cpu, ram, price, count }) => (
+        <p key={id}>
+          ({price} | {cpu} | {ram}) x {count}{' '}
+          <button onClick={() => dispatch(removeOneItemFromCart(id))}>
+            Remove one
+          </button>{' '}
+          <button onClick={() => dispatch(removeItemFromCart(id))}>
+            Delete
+          </button>
+        </p>
+      ))}
+      <h3>total price - Rs:{total}</h3>
     </div>
   );
 };
