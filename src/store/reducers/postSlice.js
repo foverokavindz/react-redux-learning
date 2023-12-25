@@ -10,16 +10,14 @@ const initialState = {
 // methanin eka data object eka thma action.payload eka widiyuata pass wenne
 // thunk kiynne middleware ekak
 export const getPost = createAsyncThunk('getPost', async (id) => {
-  try {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-    const data = await res.json();
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  const data = await res.json();
 
-    if (data) {
-      return data;
-    } else {
-      return { err: 'some Error' };
-    }
-  } catch (error) {}
+  if (data) {
+    return data;
+  } else {
+    return { err: 'some Error' };
+  }
 });
 
 // data load,pending,unsecces unama run wenna external functions
@@ -45,8 +43,12 @@ const postSlice = createSlice({
       // mekedi eliyen kriyathmaka wena functions wala  output eka object ekak widiyt enwa
       //ewa access krna recommonded widiy thama bguiklder function ekak hraha access krn eka
 
-      state.loading = 'completed'; // me tika dn state ekata set wenwa
-      state.data = action.payload;
+      if (action.payload.err) {
+        state.loading = 'failed';
+      } else {
+        state.loading = 'completed'; // me tika dn state ekata set wenwa
+        state.data = action.payload;
+      }
     });
 
     builder.addCase(getPost.rejected, (state, action) => {
